@@ -1,4 +1,5 @@
 import express from "express";
+const v1Router = require("./v1/routes");
 import mysql from "mysql2/promise"
 
 const app = express();
