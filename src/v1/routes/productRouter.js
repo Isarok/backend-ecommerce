@@ -8,7 +8,7 @@ const v1ProductRouter = Router();
 
 v1ProductRouter
     .get("/", productController.getAllProducts)
-    .get("/:productId", productController.getProduct)
+    .get("/:product_Id", productController.getProduct)
     .post("/", productController.createNewProduct)
     .patch("/:productId", productController.updateOneProduct)
     .delete("/:productId", productController.deleteOneProduct)

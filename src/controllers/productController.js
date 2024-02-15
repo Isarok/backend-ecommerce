@@ -1,3 +1,4 @@
+// llama al servicio toda la logica asociada a express
 import { ProductModel } from "../model/productModel.js";
 
 
@@ -7,20 +8,20 @@ const ProductController = {
          res.send(allProducts);
     },
     getProduct: async (_req, res) => {
-        const product = await ProductModel.getProduct(req.params.productId);
-        res.send(`Get one product ${_req.params.productId}`);
+        const product = await ProductModel.getProduct(_req.params.product_Id);
+        res.send(`Get one product ${_req.params.product_Id}`);
     },
     createNewProduct: async (_req, res) => {
-        const createdProduct = await ProductModel.createNewProduct(req.params.productId);
+        const createdProduct = await ProductModel.createNewProduct(_req.params.productId);
         res.send(`Create one product ${_req.params.productId}`);
     },
-    updateOneProduct: (res, req) => {
-        const updatedProduct = ProductModel.updateOneProduct(req.params.productId);
-        res.send(`Update product ${req.params.productId}`);;
+    updateOneProduct: async (res, _req) => {
+        const updatedProduct = await ProductModel.updateOneProduct(_req.params.productId);
+        res.send(`Update product ${_req.params.productId}`);;
     },
-    deleteOneProduct: (res, req) => {
-        ProductModel.deleteOneProduct(req.params.productId);
-        res.send(`Delete product ${req.params.productId}`);
+    deleteOneProduct: (res, _req) => {
+        ProductModel.deleteOneProduct(_req.params.productId);
+        res.send(`Delete product ${_req.params.productId}`);
     }
 }
 
