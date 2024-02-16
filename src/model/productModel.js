@@ -13,19 +13,27 @@ const ProductModel = {
             throw new Error("Ocurrió un error al obtener los productos");
         }
     },
-    getProduct: async (productId) => {
+    getProduct: async (product_Id) => {
         try {
-            const [rows] = await pool.query("SELECT * FROM products WHERE product_id = ?", [productId]);
+            const [rows] = await pool.query("SELECT * FROM products WHERE product_id = ?", [product_Id]);
             return rows;
         } catch (error) {
             console.error("Error al obtener el producto:", error);
             throw new Error("Ocurrió un error al obtener el producto");
         }
     },
-    createNewProduct: async () => {
-        const [rows] = await pool.query("INSERT INTO products SET ?", [req.body]);
-        return rows
+    
+    createNewProduct: async (productData) => {
+        console.log (productData)
+        try {
+            const [result] = await pool.query("INSERT INTO products SET ?", [productData]);
+            return result;
+        } catch (error) {
+            console.error("Error al crear un nuevo producto:", error);
+            throw new Error("Ocurrió un error al crear un nuevo producto");
+        }
     },
+
     updateOneProduct: () => {
         return;
     },
