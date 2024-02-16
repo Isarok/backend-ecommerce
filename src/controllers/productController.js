@@ -1,5 +1,5 @@
 // llama al servicio toda la logica asociada a express
-import { ProductModel } from "../model/productModel.js";
+import { ProductModel } from "../models/productModel.js";
 
 
 const ProductController = {
@@ -45,10 +45,17 @@ const ProductController = {
             res.status(500).send("Ocurrió un error al crear un nuevo producto");
         }
     },
-    updateOneProduct: async (res, _req) => {
-        const updatedProduct = await ProductModel.updateOneProduct(_req.params.product_Id);
-        res.send(`Update product ${_req.params.productId}`);;
-    },
+    updateOneProduct: async (req, res) => {
+        console.log(req.params.product_Id, req.body);
+        try {
+          const updatedProduct = await ProductModel.updateOneProduct(req.params.product_Id, req.body);
+          res.json(updatedProduct);
+        } catch (error) {
+          console.error("Error al actualizar el producto:", error);
+          res.status(500).send("Ocurrió un error al actualizar el producto");
+        }
+      },
+    
     deleteOneProduct: (res, _req) => {
         ProductModel.deleteOneProduct(_req.params.product_Id);
         res.send(`Delete product ${_req.params.product_Id}`);

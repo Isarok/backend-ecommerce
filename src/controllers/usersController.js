@@ -1,4 +1,3 @@
-import UsersModel from '../model/usersModel.js';
 
 const UserController = {
     registerUser: async (req, res) => {
