@@ -36,12 +36,12 @@ const ProductModel = {
 
     updateOneProduct: async (productId, productData) => {
         try {
-          const { name, price, category_id } = productData;
-          if (!name || !price || !category_id) {
+          const { name, price, category_id, description } = productData;
+          if (!name || !price || !category_id || !description) {
             throw new Error("name, price y category_id son campos obligatorios");
           }
-          const query = 'UPDATE products SET name = ?, price = ?, category_id = ? WHERE product_id = ?';
-          const [result] = await pool.query(query, [name, price, category_id, productId]);
+          const query = 'UPDATE products SET name = ?, price = ?, category_id = ?, description = ? WHERE product_id = ?';
+          const [result] = await pool.query(query, [name, price, category_id, description, productId]);
           console.log(result);
           return result;
         } catch (error) {
@@ -49,9 +49,16 @@ const ProductModel = {
           throw new Error("Ocurrió un error al actualizar el producto");
         }
       },
-    deleteOneProduct: () => {
-        return;
+      deleteOneProduct: async (productId) => {
+        try {
+          const query = 'DELETE FROM products WHERE product_id = ?';
+          const [result] = await pool.query(query, [productId]);
+          return result;
+        } catch (error) {
+          console.error("Error al borrar el producto:", error);
+          throw new Error("Ocurrió un error al borrar el producto");
+        }
     }
-};
+}
 
 export { ProductModel }

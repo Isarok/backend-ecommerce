@@ -56,10 +56,15 @@ const ProductController = {
         }
       },
     
-    deleteOneProduct: (res, _req) => {
-        ProductModel.deleteOneProduct(_req.params.product_Id);
-        res.send(`Delete product ${_req.params.product_Id}`);
-    }
+      deleteOneProduct: async (req, res) => {
+        try {
+          await ProductModel.deleteOneProduct(req.params.product_Id);
+          res.send(`Product ${req.params.product_Id} has been deleted`);
+        } catch (error) {
+          console.error("Error al borrar el producto:", error);
+          res.status(500).send("Ocurrió un error al borrar el producto");
+        }
+      }
 }
 
   
