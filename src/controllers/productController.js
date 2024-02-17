@@ -64,6 +64,25 @@ const ProductController = {
           console.error("Error al borrar el producto:", error);
           res.status(500).send("Ocurrió un error al borrar el producto");
         }
+      },
+      updateStock: async (req, res) => {
+        const { product_Id, is_available } = req.body;
+        try {
+          // Realizar la actualización del stock en el modelo
+          await ProductModel.updateStock(product_Id, is_available);
+      
+          // Actualizar el campo "is_available" basado en el nuevo stock
+          const isAvailable = is_available > 0; // Establecer is_available a true si el nuevo stock es mayor que 0
+      
+          // Lógica para actualizar el campo "is_available" en el modelo
+          await ProductModel.updateStock(product_Id, isAvailable);
+      
+          res.json({ message: "Stock y disponibilidad actualizados correctamente" });
+        } catch (error) {
+          console.error("Error al actualizar el stock y la disponibilidad del producto:", error);
+          res.status(500).json({ error: "Ocurrió un error al actualizar el stock y la disponibilidad del producto" });
+        }
+      
       }
 }
 

@@ -12,5 +12,6 @@ v1ProductRouter
     .post("/", productController.createNewProduct)
     .patch("/:product_Id", productController.updateOneProduct)
     .delete("/:product_Id", productController.deleteOneProduct)
+    .patch("/:productId/update-stock", productController.updateStock)
 
 export { v1ProductRouter };

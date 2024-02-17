@@ -58,7 +58,18 @@ const ProductModel = {
           console.error("Error al borrar el producto:", error);
           throw new Error("Ocurrió un error al borrar el producto");
         }
-    }
+      },
+      updateStock: async (product_Id, is_available) => {
+        try {
+          const query = 'UPDATE products SET is_available = ? WHERE product_id = ?';
+          const [result] = await pool.query(query, [is_available, product_Id]);
+          return result;
+        } catch (error) {
+          console.error("Error al actualizar el stock del producto:", error);
+          throw new Error("Ocurrió un error al actualizar el stock del producto");
+        }
+      }
+  
 }
 
 export { ProductModel }
