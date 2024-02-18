@@ -1,28 +1,60 @@
-import { CategoriesModel } from "../model/categoriesModel.js";
-
+import { CategoriesModel } from "../models/categoriesModel.js";
 
 const CategoriesController = {
-    getAllCategories: async ( _req, res) => {
-        const allCategoriess = await CategoriesModel.getAllCategories();
-         res.send(allCategoriess);
-    },
-    getCategories: async (_req, res) => {
-        const product = await CategoriesModel.getCategories(_req.params.productId);
-        res.send(`Get one product ${_req.params.productId}`);
-    },
-    createNewCategories: async (_req, res) => {
-        const createdCategories = await CategoriesModel.createNewCategories(_req.params.productId);
-        res.send(`Create one product ${_req.params.productId}`);
-    },
-    updateOneCategories: (res, _req) => {
-        const updatedCategories = CategoriesModel.updateOneCategories(_req.params.productId);
-        res.send(`Update product ${_req.params.productId}`);;
-    },
-    deleteOneCategories: (res, _req) => {
-        CategoriesModel.deleteOneCategories(_req.params.productId);
-        res.send(`Delete product ${_req.params.productId}`);
+  getAllCategories: async (_req, res) => {
+    try {
+      const allCategories = await CategoriesModel.getAllCategories();
+      res.json(allCategories);
+    } catch (error) {
+      res.status(500).json({ error: "Ocurrió un error al obtener todas las categorías" });
     }
-}
-
+  },
+  getCategories: async (req, res) => {
+    try {
+        const category = await CategoriesModel.getCategory(req.params.categoryId);
+        if (category.length > 0) {
+            res.json(category[0]); // Enviar la primera categoría encontrada como respuesta en formato JSON
+        } else {
+            res.status(404).send("Categoría no encontrada"); // Enviar un mensaje si la categoría no se encuentra
+        }
+    } catch (error) {
+        console.error("Error al obtener la categoría:", error);
+        res.status(500).send("Ocurrió un error al obtener la categoría");
+    }
+  },
+  createNewCategory: async (req, res) => {
+    const { name, user_id } = req.body;
+    if (!name || !user_id) {
+      return res.status(400).json({ error: "El nombre de la categoría y el ID del usuario son campos obligatorios" });
+    }
   
-export default CategoriesController 
+    try {
+      const createdCategory = await CategoriesModel.createNewCategory(name, user_id);
+      res.json(createdCategory);
+    } catch (error) {
+      res.status(500).json({ error: "Ocurrió un error al crear la categoría" });
+    }
+  },
+  updateOneCategory: async (req, res) => { 
+    try {
+      //console.log("Params:", req.params); // Verifica los parámetros de la solicitud
+      //console.log("Body:", req.body); // Verifica el cuerpo de la solicitud
+      const updatedCategory = await CategoriesModel.updateOneCategory(req.params.category_id, req.body.name);
+      console.log("Updated category:", updatedCategory); // Verifica la categoría actualizada
+      res.json(updatedCategory);
+    } catch (error) {
+      console.error("Error al actualizar la categoría:", error);
+      res.status(500).json({ error: "Ocurrió un error al actualizar la categoría" });
+    }
+  },
+  deleteOneCategories: async (req, res) => {
+    try {
+      await CategoriesModel.deleteCategory(req.params.categoryId);
+      res.json({ message: "Categoría eliminada correctamente" });
+    } catch (error) {
+      res.status(500).json({ error: "Ocurrió un error al eliminar la categoría" });
+    }
+  }
+};
+
+export default CategoriesController ;

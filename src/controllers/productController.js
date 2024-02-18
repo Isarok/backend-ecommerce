@@ -66,25 +66,24 @@ const ProductController = {
         }
       },
       updateStock: async (req, res) => {
-        const { product_Id, is_available } = req.body;
+      
         try {
+          const product_id = req.body.product_id; // Acceder a product_id desde req.body
+          const is_available = req.body.is_available; // Utilizar el valor de is_available desde el cuerpo de la solicitud
+        
           // Realizar la actualización del stock en el modelo
-          await ProductModel.updateStock(product_Id, is_available);
-      
-          // Actualizar el campo "is_available" basado en el nuevo stock
-          const isAvailable = is_available > 0; // Establecer is_available a true si el nuevo stock es mayor que 0
-      
-          // Lógica para actualizar el campo "is_available" en el modelo
-          await ProductModel.updateStock(product_Id, isAvailable);
-      
-          res.json({ message: "Stock y disponibilidad actualizados correctamente" });
+          const updateResult = await ProductModel.updateStock(product_id, is_available);
+        
+          if (updateResult) {
+            res.json({ message: "Stock y disponibilidad actualizados correctamente" });
+          } else {
+            res.status(500).json({ error: "Ocurrió un error al actualizar el stock del producto" });
+          }
         } catch (error) {
           console.error("Error al actualizar el stock y la disponibilidad del producto:", error);
           res.status(500).json({ error: "Ocurrió un error al actualizar el stock y la disponibilidad del producto" });
         }
-      
-      }
-}
-
+      },
+    }
   
 export default ProductController 

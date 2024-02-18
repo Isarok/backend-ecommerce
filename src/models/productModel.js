@@ -1,5 +1,5 @@
 //acá haremos los llamados a la base de datos de MySql
-import {pool} from "../database/BBDD.js";
+import { pool } from "../database/BBDD.js";
 
 // In src/services/workoutModel.js
 const ProductModel = {
@@ -59,10 +59,10 @@ const ProductModel = {
           throw new Error("Ocurrió un error al borrar el producto");
         }
       },
-      updateStock: async (product_Id, is_available) => {
+      updateStock: async (product_id, is_available) => {
         try {
           const query = 'UPDATE products SET is_available = ? WHERE product_id = ?';
-          const [result] = await pool.query(query, [is_available, product_Id]);
+          const [result] = await pool.query(query, [is_available, product_id]);
           return result;
         } catch (error) {
           console.error("Error al actualizar el stock del producto:", error);
