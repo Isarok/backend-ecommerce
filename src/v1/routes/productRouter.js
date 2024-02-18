@@ -1,10 +1,9 @@
-
+import { isAdmin } from "../../authorizations/authorizationMiddleware.js";
 import productController from "../../controllers/productController.js";
 import { Router } from "express";
 
-
-
 const v1ProductRouter = Router();
+//v1ProductRouter.use(isAdmin); // Aplicar el middleware isAdmin a todas las rutas de roles
 
 v1ProductRouter
     .get("/", productController.getAllProducts)

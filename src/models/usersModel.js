@@ -1,4 +1,4 @@
-import pool from '../db.js';
+import pool from '../models/BBDD.js';
 
 const UsersModel = {
   // Otras funciones del modelo...
