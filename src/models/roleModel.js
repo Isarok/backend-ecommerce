@@ -22,4 +22,4 @@ const Role = {
     return result.affectedRows;
   }
 };
-export {Role};
+export { Role };

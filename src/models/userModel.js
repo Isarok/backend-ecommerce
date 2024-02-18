@@ -1,6 +1,6 @@
-import { pool } from "../../database/BBDD.js";
+import { pool } from "../database/BBDD.js";
 
-const UsersModel = {
+const UserModel = {
   getAllUsers: async () => {
     try {
       const query = 'SELECT * FROM users';
@@ -20,18 +20,24 @@ const UsersModel = {
     }
   },
   createUser: async (userData) => {
+    const { name, email, password, role_id, is_active} = userData;
+    if (!name || !email || !password || !role_id || !is_active) {
+      throw new Error("Los campos name, email, password y role_id son obligatorios");
+    }
+  
     try {
-      const query = 'INSERT INTO users SET ?';
-      const result = await pool.query(query, userData);
+      const [result] = await pool.query('INSERT INTO users SET ?', [userData]);
+      
       return result.insertId;
+      
     } catch (error) {
       throw new Error("Error al crear un nuevo usuario");
     }
   },
-  updateUserRole: async (userId, newRoleId) => {
+  updateUserRole: async (userId, roleId) => {
     try {
       const query = 'UPDATE users SET role_id = ? WHERE user_id = ?';
-      const result = await pool.query(query, [newRoleId, userId]);
+      const result = await pool.query(query, [roleId, userId]);
       return result.affectedRows > 0;
     } catch (error) {
       throw new Error("Error al actualizar el rol del usuario");
@@ -48,4 +54,4 @@ const UsersModel = {
   }
 };
 
-export default UsersModel;
+export { UserModel };
