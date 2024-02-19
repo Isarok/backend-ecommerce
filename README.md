@@ -2,6 +2,10 @@
 
 Este proyecto es una aplicación basada en el patrón Modelo-Vista-Controlador (MVC) que utiliza Node.js y Express para crear una API REST que gestiona las peticiones a una base de datos MySQL. La aplicación está desarrollada en JavaScript y hace uso de las dependencias npm como dotenv, mysql2 y nodemon.
 
+## Descripción
+
+Esta aplicación se utiliza para la gestión de productos, categorías, roles y usuarios.
+
 ## Tecnologías Utilizadas
 
 - Visual Studio Code
