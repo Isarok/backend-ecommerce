@@ -51,6 +51,12 @@ const UserModel = {
     } catch (error) {
       throw new Error("Error al borrar el usuario");
     }
+  },
+  loginUser: async (email, password, is_active, name, role_id) => {
+   
+    const [result, metadata] = await pool.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}' AND is_active = ${is_active} AND name = '${name}' AND role_id = ${role_id}`);
+    return result
+  
   }
 };
 

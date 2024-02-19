@@ -8,6 +8,7 @@ v1UserRouter
   .get('/:id', userController.getUserById)
   .post('/', userController.createUser)
   .put('/:updateRole', userController.updateUserRole)
-  .delete('/:id', userController.deleteUser);
+  .delete('/:id', userController.deleteUser)
+  .post('/login', userController.loginUser);
 
 export { v1UserRouter }

@@ -58,6 +58,18 @@ const userController = {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
+  },
+  loginUser: async (req, res) => {
+    const { email, password, is_active, name, role_id } = req.body;
+    if (!email || !password || !is_active || !name || !role_id) {
+      return res.status(400).json({ error: "Los campos email, password, is_active, name y role_id son obligatorios" });
+    }
+    try {
+      const user = await UserModel.loginUser(email, password, is_active,name, role_id);
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
 };
 
