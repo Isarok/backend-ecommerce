@@ -9,6 +9,19 @@ const roleController = {
       res.status(500).json({ error: "Error al obtener los roles" });
     }
   },
+  getRole : async function(req, res) {
+    const roleId = req.params.roleId;
+    try {
+      const role = await Role.getRole(roleId);
+      if (role) {
+        res.json(role);
+      } else {
+        res.status(404).json({ error: "Rol no encontrado" });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Error al obtener el rol" });
+    }
+  },
   createRole: async function(req, res) {
     const { name } = req.body;
     try {

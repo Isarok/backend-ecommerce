@@ -1,0 +1,154 @@
+### CRUD PRODUCTS
+
+### Get all product
+GET http://localhost:3111/api/v1/product
+
+### Get one product
+GET http://localhost:3111/api/v1/product/1
+
+### Post Create product
+POST http://localhost:3111/api/v1/product 
+Content-Type: application/json
+
+{
+    "name": "Mascara de Panamá",
+    "description": "Encantadorea mascara traida desde Bocas del Toro",
+    "price": "5000",
+    "category_id": 3,
+    "user_id": 1,
+    "is_available": 1
+}
+
+### Patch update product
+PATCH http://localhost:3111/api/v1/product/4 
+
+{
+    "product_id": 4,
+    "name": "Mascara de Cadiz",
+    "description": "Otra forma de disfrutar de los carnavales de Cadiz",
+    "price": "500",
+    "category_id": 3,
+    "user_id": 1,
+    "is_available": 1
+}
+
+### Delete product
+
+DELETE http://localhost:3111/api/v1/product/11
+
+### Stock is available or not available
+PATCH http://localhost:3111/api/v1/product/5/update-stock
+
+{   
+    "is_available": 0
+}
+
+### CRUD CATEGORIES
+
+### Get all categories
+GET http://localhost:3111/api/v1/caregories
+
+### Get category by id
+GET http://localhost:3111/api/v1/roles/1
+
+### Post Create new category 
+POST http://localhost:3111/api/v1/roles 
+Content-Type: application/json
+
+{
+    "name": "Mascara Nica",
+    "category_id": 7,
+    "user_id": 1
+}
+
+### Patch update category
+PATCH http://localhost:3111/api/v1/role/6
+
+{
+    "name": "Mascara Tica",
+    "category_id": 6,
+    "user_id": 1
+}
+
+### Delete category
+
+DELETE http://localhost:3111/api/v1/role/7
+
+
+
+
+### CRUD ROLES
+
+### Get all roles
+GET http://localhost:3111/api/v1/roles
+
+### Get role
+
+GET http://localhost:3111/api/v1/roles/1
+
+### Create new role 
+POST http://localhost:3111/api/v1/roles 
+Content-Type: application/json
+
+{
+    "name": "Space Surimi",
+    "role_id": 2
+    
+}
+
+### Patch update role
+PUT http://localhost:3111/api/v1/roles/4
+
+{
+    "name": "buyer",
+    "role_id": 6 
+}
+
+### Delete role
+
+DELETE http://localhost:3111/api/v1/roles/5
+
+### CRUD USER 
+
+### Get all users
+GET http://localhost:3111/api/v1/users
+
+### Get user by id 
+GET http://localhost:3111/api/v1/users/9
+
+### Post create user
+
+POST http://localhost:3111/api/v1/users
+
+{
+    "name": "JOHN WICK",
+    "email": "jhonwick@yahoo.org",
+    "password": "mydog",
+    "role_id" : "2",
+    "is_active":1
+}
+
+### Put update user rol
+
+PUT http://localhost:3111/api/v1/updateRole
+
+{
+    "user_id": 2,
+    "role_id" : 1  
+}
+
+### Delete user by id 
+
+DELETE http://localhost:3111/api/v1/users/8
+
+### Login user 
+
+POST http://localhost:3111/api/v1/login
+
+{
+    "name": "arturitu",
+    "email": "arturitu@gmail.com",
+    "password": "123456",
+    "role_id" : "2",
+    "is_active":1
+}

@@ -57,32 +57,17 @@ const ProductController = {
       },
     
       deleteOneProduct: async (req, res) => {
-        try {
           await ProductModel.deleteOneProduct(req.params.product_Id);
           res.send(`Product ${req.params.product_Id} has been deleted`);
-        } catch (error) {
-          console.error("Error al borrar el producto:", error);
-          res.status(500).send("Ocurrió un error al borrar el producto");
-        }
+       
       },
       updateStock: async (req, res) => {
-      
-        try {
-          const product_id = req.body.product_id; // Acceder a product_id desde req.body
-          const is_available = req.body.is_available; // Utilizar el valor de is_available desde el cuerpo de la solicitud
-        
-          // Realizar la actualización del stock en el modelo
-          const updateResult = await ProductModel.updateStock(product_id, is_available);
-        
-          if (updateResult) {
+        const updateStock = await ProductModel.updateStock(req.body.is_available) // Acceder a product_id desde req.body
+          if (updateStock) {
             res.json({ message: "Stock y disponibilidad actualizados correctamente" });
           } else {
             res.status(500).json({ error: "Ocurrió un error al actualizar el stock del producto" });
           }
-        } catch (error) {
-          console.error("Error al actualizar el stock y la disponibilidad del producto:", error);
-          res.status(500).json({ error: "Ocurrió un error al actualizar el stock y la disponibilidad del producto" });
-        }
       },
     }
   

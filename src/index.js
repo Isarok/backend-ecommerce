@@ -17,9 +17,6 @@ app.use("/api/v1/roles", v1RoleRouter);
 app.use("/api/v1/users", v1UserRouter);
 app.use("/api/v1", v1UserRouter);
 
-
-
-
 app.listen(PORT, () => {
   console.log(`API is listening on port ${PORT}`);
 });

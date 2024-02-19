@@ -5,10 +5,11 @@ const Role = {
     const roles = await pool.query('SELECT * FROM roles');
     return roles;
   },
-  getById: async function(roleId) {
+  getRole: async function(roleId) {
     const role = await pool.query('SELECT * FROM roles WHERE role_id = ?', [roleId]);
     return role[0];
   },
+  
   create: async function(name) {
     const result = await pool.query('INSERT INTO roles (name) VALUES (?)', [name]);
     return result.insertId;

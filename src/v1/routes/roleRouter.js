@@ -7,6 +7,7 @@ const v1RoleRouter = Router();
 
 v1RoleRouter
     .get("/", roleController.getAllRoles)
+    .get("/:roleId", roleController.getRole)
     .post("/", roleController.createRole)
     .put("/:roleId", roleController.updateRole)
     .delete("/:roleId", roleController.deleteRole);
