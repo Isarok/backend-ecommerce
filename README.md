@@ -1,6 +1,6 @@
 # Ecommerce_Carnival_Masks
 
-Este proyecto es una aplicación basada en el patrón Modelo-Vista-Controlador (MVC) que utiliza Node.js y Express para crear una API REST que gestiona las peticiones a una base de datos MySQL. La aplicación está desarrollada en JavaScript y hace uso de las dependencias npm como dotenv, mysql2 y nodemon.
+Este proyecto es una aplicación basada en el patrón Modelo-Vista-Controlador (MVC) que utiliza Node.js y Express para crear una API REST que gestiona las peticiones a una base de datos MySQL. La aplicación está desarrollada en JavaScript y hace uso de las dependencias npm como dotenv, mysql2 y nodemon. Es una version Beta y necesita algunas actualizaciones para ser usada en su totalidad en el entorno de producción.
 
 ## Descripción
 
@@ -44,3 +44,15 @@ Esta aplicación se utiliza para la gestión de productos, categorías, roles y 
 ## Contacto
 
 Si tienes preguntas o sugerencias relacionadas con este proyecto, no dudes en ponerte en contacto conmigo en [isaac.lucerito@gmail.com].
+
+## AVISOS
+
+Haciendo el ultimo check de las peticione he perdido funcinalidades que estaban y que fueron agregadas, nose que paso, pero a dejado de funcionar lo siguiente:
+
+- Login: error de camos obligatorios.
+- update user role: el usuario no fue encontrado.
+- Delete user: el usuario no fue encontrado pero se actualiza en la base de datos.
+- Delete role: el rol no fue encontrado pero se actualiza en la base de datos.
+- Update stock: se actualizaba pero ya no.
+- Update category idem: se actualizaba pero ya no.
+- Create user idem: se creaba pero ya no.
